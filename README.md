@@ -1,16 +1,32 @@
-# React + Vite
+# Night Shift v2 (Autonomous Pitch Engine)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the master repository for the Night Shift pipeline—an autonomous agentic system that builds, deploys, and drafts bespoke pitches while you sleep.
 
-Currently, two official plugins are available:
+## The Operating Contract
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 1. How Leads Become Briefs
+Every night at midnight, the orchestration agent reads `leads/market-map.md` and `capability-ledger.md`. It scores leads based on fit, pain evidence, and contact confidence. It selects one target, generating a `brief.md` and `prototype-spec.md` that map your proven IP to their specific product weakness.
 
-## React Compiler
+### 2. How the Prototype is Built
+The agent generates a bespoke React component injected into `src/pitches/<company>.jsx`. 
+It **never** runs `npm create vite`—it natively injects routes into this single repository to ensure blazing fast CI/CD and zero GitHub sprawl.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 3. How QA Works (The Iron Gate)
+Before any code is committed, the agent runs `npm run qa <company-slug>`. This script enforces the following blocking checks:
+- **Linting:** `npm run lint` must pass with 0 errors.
+- **Build:** `npm run build` must compile.
+- **Route Injection:** The `App.jsx` file must successfully route to the new pitch.
+- **Visual Evidence:** Puppeteer generates desktop and mobile screenshots of the live component.
+- **Humility/Safety:** The UI must explicitly contain a "Simulated Data" or "Mockup" disclaimer.
+- **Email Staging:** A drafted email (`email-draft.md`) must exist without making aggressive claims about private data.
 
-## Expanding the ESLint configuration
+If `npm run qa` fails, the agent attempts to self-repair the code up to 3 times. If it still fails, the pitch is aborted and no email is drafted.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 4. What Gets Committed
+Only code that passes the hard `npm run qa` gate is committed to `main`. 
+GitHub Actions then automatically runs a final check and deploys the bundle to GitHub Pages (`jdurey.github.io/night-shift-pitches/p/<company>`).
+
+### 5. Morning Approval Workflow
+The agent does **not** send emails autonomously.
+Instead, it runs `scripts/generate-dashboard.cjs`. This generates an offline `morning-console.html` dashboard and a clickable bash script (`approve-<company>.command`).
+In the morning, you review the HTML dashboard over coffee. If the prototype and score meet your standards, you simply double-click the `.command` file on your local machine, which natively bridges to macOS Apple Mail via AppleScript and stages the draft in your outbox.
