@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "qa": "node scripts/qa.js",
     "substrate:check": "node scripts/substrate-check.cjs",
-    "substrate:lock": "node scripts/substrate-lock.cjs"
+    "substrate:lock": "node scripts/substrate-lock.cjs",
+    "substrate:mirror": "node scripts/mirror-substrate.cjs"
   },
   "dependencies": {
     "react": "^19.2.6",
