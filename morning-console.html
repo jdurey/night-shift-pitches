@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Night Shift - Morning Console</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen p-8">
+  <div class="max-w-5xl mx-auto">
+    <header class="mb-10 border-b border-gray-700 pb-4">
+      <h1 class="text-3xl font-bold text-blue-400">Night Shift Approval Console</h1>
+      <p class="text-gray-400 mt-2">Review prototypes built while you were asleep.</p>
+    </header>
+    <div class="space-y-8">
+
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 shadow-xl">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h2 class="text-2xl font-semibold capitalize">oboe <span class="bg-green-900 text-green-300 px-2 py-1 rounded text-xs uppercase font-bold">Passed QA</span></h2>
+            <div class="mt-2 space-x-4">
+              <a href="https://jdurey.github.io/night-shift-pitches/p/oboe/" target="_blank" class="text-blue-400 hover:underline text-sm">View Live Prototype</a>
+              <span class="text-gray-500">|</span>
+              <span class="font-mono text-sm">QA Score: <span class="text-green-400 font-bold">92/100</span></span>
+            </div>
+          </div>
+          <button class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors" onclick="alert('Approve logic goes here (executes AppleScript)')">
+            Approve & Draft Email
+          </button>
+        </div>
+        
+        <div class="mt-6 bg-gray-900 p-4 rounded text-sm font-mono text-gray-300">
+          <h3 class="text-gray-500 uppercase tracking-wider text-xs mb-2">QA Details</h3>
+          <p class="text-green-400">No blocking failures.</p>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</body>
+</html>
