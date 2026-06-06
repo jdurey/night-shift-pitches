@@ -8,7 +8,9 @@
     "build": "vite build && cp dist/index.html dist/404.html",
     "lint": "eslint .",
     "preview": "vite preview",
-    "qa": "node scripts/qa.js"
+    "qa": "node scripts/qa.js",
+    "substrate:check": "node scripts/substrate-check.cjs",
+    "substrate:lock": "node scripts/substrate-lock.cjs"
   },
   "dependencies": {
     "react": "^19.2.6",

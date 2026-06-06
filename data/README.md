@@ -2,6 +2,28 @@
 
 JSONL is the canonical store. Each line is one complete JSON object. Files are append-only unless a human explicitly approves a cleanup migration.
 
+Before any automated run writes substrate data, it must acquire the repo-level write lock:
+
+```bash
+npm run substrate:lock acquire
+```
+
+Release it at the end of the run:
+
+```bash
+npm run substrate:lock release
+```
+
+If another instance holds the lock, stop the run instead of writing. Stale locks older than six hours are removed automatically by the lock script.
+
+Before committing, run:
+
+```bash
+npm run substrate:check
+```
+
+This fails on duplicate canonical IDs and warns on likely duplicate content keys.
+
 ## Files
 
 - `sources.jsonl`: official source batches and rights notes.
@@ -12,6 +34,16 @@ JSONL is the canonical store. Each line is one complete JSON object. Files are a
 - `review-index.csv`: flat mirror for spreadsheet review. It is not canonical.
 
 ## Required Record Shape
+
+IDs must be deterministic, not generated from the current time. If the same source/item/misconception is encountered by two independent runs, both runs should produce the same ID so duplicates are detectable.
+
+Recommended ID rules:
+
+- `source_id`: agency + assessment + year + grade + subject + material family.
+- `item_id`: `source_id` + official item number/id when available; otherwise `source_id` + stable content/metadata hash.
+- `misconception_id`: subject + grade band + normalized concept + normalized error pattern.
+- `concept_pack_id`: subject + grade band + normalized concept + version only when the instructional model changes.
+- `run_id`: date + source batch id + short hash of the run scope.
 
 ### Source
 
